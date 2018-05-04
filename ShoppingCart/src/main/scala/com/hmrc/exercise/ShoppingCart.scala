@@ -6,28 +6,14 @@ object ShoppingCart {
     var total: Double = 0
     var totalApple: Int = args.count(p => p.equals("Apple"))
     var totalOrange: Int = args.count(p => p.equals("Orange"))
-    var appleBuyCounter: Int = 0
-    var orangeBuyCounter: Int = 0
 
-    while (totalApple > 1) {
-      totalApple = totalApple - 2
-      appleBuyCounter = appleBuyCounter + 1
-    }
-    if (totalApple == 1) {
-      appleBuyCounter += 1
-    }
+    var appleBuyCounter = CurrentOffers.getOffer("Apple").calc(totalApple)
 
-    while (totalOrange > 2) {
-      totalOrange = totalOrange - 3
-      orangeBuyCounter = orangeBuyCounter + 2
-    }
-    orangeBuyCounter = totalOrange + orangeBuyCounter
+    println("Price for Apple -->> " + (appleBuyCounter * PriceList.APPLE.price) / 100D)
 
-    var appleTotalCosts = (appleBuyCounter * PriceList.APPLE.price) / 100D
-    var orangeTotalCosts = (orangeBuyCounter * PriceList.ORANGE.price) / 100D
-    println("Total Apple Costs -->> " + appleTotalCosts)
-    println("Total orange Costs -->> " + orangeTotalCosts)
-    println("Total checkout Amount -->> " + (appleTotalCosts + orangeTotalCosts))
+    var orangeBuyCounter = CurrentOffers.getOffer("Orange").calc(totalOrange)
+
+    println("Price for Orange -->> " + (orangeBuyCounter * PriceList.ORANGE.price) / 100D)
 
   }
 
